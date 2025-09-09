@@ -3,7 +3,7 @@
 # File paths
 pointcloud_path: "outputs/box/prime_seg_gaussians.ply"
 waypoints_file: "outputs/all_subgoals.json"
-calibration_file: "/home/jiachengxu/workspace/master_thesis/POGS/src/pogs/calibration_outputs/world_to_d405.tf"
+calibration_file: "src/pogs/calibration_outputs/world_to_d405.tf"
 
 # Target object
 semantic_query: "box cutter"

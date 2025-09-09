@@ -1,37 +1,37 @@
-## Persistent Object Gaussian Splat (POGS) for Tracking Human and Robot Manipulation of Irregularly Shaped Objects
+## Predictive Gaussian Splat (PGS) for End-to-End Robot Manipulation
 
-#### Download Models and Data
-##### Model
-Download trained models from [here](https://drive.google.com/drive/folders/1tBHKf60K8DLM5arm-Chyf7jxkzOr5zGl?usp=sharing) and copy them into the `checkpoints/` folder.
-##### Test data
-Download the test data from [here](https://drive.google.com/drive/folders/1TqpM2wHAAo0j3i1neu3Xeru3_WnsYQnx?usp=sharing) and copy them them into the `test_data/` folder.
+## Installation with single line
+```bash
+pixi r build
+```
 
 ## Usage
-```
+activate the environment
+```bash
 pixi shell
 ```
 ### Calibrate wrist mounted and third person cameras
 Before training/tracking POGS, make sure wrist mounted camera and third-person view camera are calibrated. We use an Aruco marker for the calibration
-```
+```bash
 cd src/pogs/scripts
 python calibrate_cameras.py
 ```
 ### Rekep
 Run Rekep and get path
-```
+```bash
 pixi r rekep
 ```
 
 ### Scene Capture
-Script used to perform hemisphere capture with robot on tabletop scene. We used manual trajectory but you can also put the robot in "teach" mode to capture trajectory.
-```
+We used manual trajectory, you can capture trajectory at calibrate_cameras.py.
+```bash
 python src/pogs/scripts/scene_capture.py --scene box
 ```
 
 ### Train POGS
 Script used to train the POGS for 3000 steps
-```
-ns-train pogs --data /home/jiachengxu/workspace/master_thesis/POGS/src/pogs/scripts/../data/utils/datasets/box
+```bash
+ns-train pogs --data src/pogs/data/utils/datasets/box
 ```
 Once the POGS has completed training, there are N steps to then actually define/save the object clusters.
 1. Hit the cluster scene button.
@@ -46,37 +46,37 @@ Once the POGS has completed training, there are N steps to then actually define/
 Once you have trained the POGS, make sure you have the config file and checkpoint directory from the terminal saved.
 
 ### View Gsplat
-```
-ns-viewer --load-config /home/jiachengxu/workspace/master_thesis/POGS/outputs/box/pogs/2025-09-02_204315/config.yml --viewer.websocket-port 8007
+```bash
+ns-viewer --load-config outputs/box/pogs/2025-09-09_143905/config.yml --viewer.websocket-port 8007
 ```
 
 ### Output filtered end pose
-```
+```bash
 python scripts/sample_and_filter_poses.py
 ```
 
 ### Run Bi-RRT to get path
-```
+```bash
 python scripts/BiRRT_Cons.py
 ```
 
 ### Visualize animation that equal to action
-```
+```bash
 python scripts/generate_action_animation.py
 ```
 
 ### Execute on UR5
-```
+```bash
 python scripts/execute_subgoals.py
 ```
 
 ### Cycle execute UR5
-```
+```bash
 python scripts/cyclic_execute_subgoals.py
 ```
 
 ## Bibtex
-If you find POGS useful for your work please consider citing:
+Thanks to POGS entire framework:
 ```
 @article{yu2025pogs,
   author    = {Yu, Justin and Hari, Kush and El-Refai, Karim and Dalil, Arnav and Kerr, Justin and Kim, Chung-Min and Cheng, Richard, and Irshad, Muhammad Z. and Goldberg, Ken},

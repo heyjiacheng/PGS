@@ -29,7 +29,7 @@ def main(
     output_video_path: str = "outputs/test_videos/action_animation.mp4",
     fps: int = 30,
     show_all_objects: bool = True,
-    calibration_file: str = "/home/jiachengxu/workspace/master_thesis/POGS/src/pogs/calibration_outputs/world_to_d405.tf",
+    calibration_file: str = "src/pogs/calibration_outputs/world_to_d405.tf",
 ):
     """Generate animation using action_subgoals.json file.
     
